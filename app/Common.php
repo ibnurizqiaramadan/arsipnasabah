@@ -13,3 +13,14 @@
  *
  * @see: https://codeigniter4.github.io/CodeIgniter4/
  */
+
+date_default_timezone_set('Asia/Jakarta');
+define('DATE_NOW', date('Y-m-d H:i:s', time()));
+
+$base_url_ = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http');
+$base_url_ .= '://' . $_SERVER['HTTP_HOST'];
+$base_url_ .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+define('BASE_URL', $base_url_);
+define('ADMIN_PATH', '/ruangadmin');
+define('API_PATH', '/api');
+define('SALT', 'hehehehe');

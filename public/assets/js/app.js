@@ -6,25 +6,23 @@ const BASE_URL = $('meta[name="baseUrl"]').attr("content"),
 	USERID = $('meta[name="userId"]').attr("content"),
 	ISADMIN = $('meta[name="admin"]').attr("content"),
 	REFRESH_TABLE_TIME = 30000;
-var table = '', table1 = '', CURRENT_PATH, refreshTableInterval, tableId;
-var htmlEditor = '', cssEditor = '', jsEditor = '';
-var socket = []
+var table = '', table1 = '', CURRENT_PATH, refreshTableInterval, tableId, tablePath;
 
-if (typeof io !== 'undefined') {
-	socket = io.connect(`https://socket.xyrus10.com`)
-	// socket = io.connect(`http://192.168.1.69:6996`)
-	// socket = io.connect(`http://localhost:6996`)
-	// socket = io.connect(`https://ipdn-socket.herokuapp.com`)
-	socket.on("connect", () => {
-		// console.log("socket connected")
-		socket.emit("connected", {
-			username: USERNAME,
-			userId: USERID,
-			origin: BASE_URL,
-			token: TOKEN,
-		});
-	});
-}
+// if (typeof io !== 'undefined') {
+// 	socket = io.connect(`https://socket.xyrus10.com`)
+// 	// socket = io.connect(`http://192.168.1.69:6996`)
+// 	// socket = io.connect(`http://localhost:6996`)
+// 	// socket = io.connect(`https://ipdn-socket.herokuapp.com`)
+// 	socket.on("connect", () => {
+// 		// console.log("socket connected")
+// 		socket.emit("connected", {
+// 			username: USERNAME,
+// 			userId: USERID,
+// 			origin: BASE_URL,
+// 			token: TOKEN,
+// 		});
+// 	});
+// }
 // socket.emit("join")
 
 moment.locale('id');
@@ -412,7 +410,7 @@ $(document).delegate('a[id="itemFloat"]', 'click', function (e) {
 					enableButton()
 				},
 				success: function (result) {
-					"ok" == result.status ? (msgSweetSuccess(result.message), table.ajax.reload(null, false), $("#checkedListData").val(""), socket.emit("affectDataTable", tableName), tableName == '#listArticle' && socket.emit("changeArticle", dataId)) : msgSweetError(result.message)
+					"ok" == result.status ? (msgSweetSuccess(result.message), table.ajax.reload(null, false), $("#checkedListData").val(""), tableName == '#listArticle' && socket.emit("changeArticle", dataId)) : msgSweetError(result.message)
 				},
 				error: function (error) {
 					errorCode(error)
@@ -607,23 +605,23 @@ function dataColumnTable(data = []) {
 
 var currentRoom = ''
 function moveRoom(room) {
-	if (currentRoom != '') socket?.emit('leaveRoom', currentRoom)
-	socket?.emit("joinRoom", room)
-	currentRoom = room
+	// if (currentRoom != '') socket?.emit('leaveRoom', currentRoom)
+	// socket?.emit("joinRoom", room)
+	// currentRoom = room
 }
 
-socket.on?.("refreshDataTable", param => {
-	if (typeof refreshData === "function") refreshData()
-})
+// socket.on?.("refreshDataTable", param => {
+// 	if (typeof refreshData === "function") refreshData()
+// })
 
-socket.on?.('doLogoutUser', param => {
-	if (param.reason == "off" && USERID == param.userId) return msgSweetWarning("Sesi Anda berakhir !").then(msg => {
-		doLogoutAjax()
-	})
-})
+// socket.on?.('doLogoutUser', param => {
+// 	if (param.reason == "off" && USERID == param.userId) return msgSweetWarning("Sesi Anda berakhir !").then(msg => {
+// 		doLogoutAjax()
+// 	})
+// })
 
-socket.on?.('tryLogoutUser', userId => {
-	if (USERID == userId) return msgSweetWarning("Sesi Anda berakhir !").then(msg => {
-		doLogoutAjax()
-	})
-})
+// socket.on?.('tryLogoutUser', userId => {
+// 	if (USERID == userId) return msgSweetWarning("Sesi Anda berakhir !").then(msg => {
+// 		doLogoutAjax()
+// 	})
+// })

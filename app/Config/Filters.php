@@ -19,6 +19,10 @@ class Filters extends BaseConfig
         'csrf'     => CSRF::class,
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
+        'cekLogin' => \App\Filters\LoginFilter::class,
+        'hasAdmin' => \App\Filters\AdminFilter::class,
+        'sudahLogin' => \App\Filters\SudahLogin::class,
+        'apiFilter' => \App\Filters\ApiFilter::class,
     ];
 
     /**
@@ -33,7 +37,7 @@ class Filters extends BaseConfig
             // 'csrf',
         ],
         'after' => [
-            'toolbar',
+            // 'toolbar',
             // 'honeypot',
         ],
     ];
@@ -58,5 +62,29 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'cekLogin' => [
+            'before' => [
+                'ruangadmin',
+                'ruangadmin/*',
+            ],
+        ],
+        'hasAdmin' => [
+            'before' => [
+                'ruangadmin/users',
+                'ruangadmin/users/*',
+            ]
+        ],
+        'sudahLogin' => [
+            'before' => 'ruangadmin/login'
+        ],
+        'apiFilter' => [
+            'before' => [
+                'api/data/*',
+                'api/row/*',
+                'api/usersinfo',
+                'api/setuser'
+            ],
+        ]
+    ];
 }
