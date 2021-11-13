@@ -14,7 +14,7 @@ class Login extends BaseController
     {
         $uri = service('uri');
         if ($uri->getSegment(1) == "") return redirect()->to('/ruangadmin/login');
-        return view('login', [
+        return view('Login', [
             'title' => 'Login',
         ]);
     }
