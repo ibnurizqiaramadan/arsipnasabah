@@ -77,11 +77,11 @@ $routes->group('ruangadmin', ['namespace' => 'App\Controllers\Admin'], function 
 
 // API Routes
 
-$routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+$routes->group('api', ['namespace' => 'App\Controllers\api'], function ($routes) {
     $routes->post('setuser/status', 'Admin::setUserStatus');
     $routes->get('getInput', 'Admin::getNasabahInput');
 
-    $routes->group('data', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->group('data', ['namespace' => 'App\Controllers\api'], function ($routes) {
         $routes->post('options/years', 'Admin::getYears/$1');
         $routes->post('options/(:any)', 'Admin::getDataOption/$1');
         $routes->post('users', 'Admin::dataUsers');
@@ -89,13 +89,13 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
         $routes->post('inputan', 'Admin::dataInputan');
     });
 
-    $routes->group('row', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->group('row', ['namespace' => 'App\Controllers\api'], function ($routes) {
         $routes->post('users/(:any)', 'Admin::getRowUsers/$1');
         $routes->post('inputan/(:any)', 'Admin::getRowInputan/$1');
     });
 
-    $routes->group('public', ['namespace' => 'App\Controllers\Api'], function ($routes) {
-        $routes->group('get', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->group('public', ['namespace' => 'App\Controllers\api'], function ($routes) {
+        $routes->group('get', ['namespace' => 'App\Controllers\api'], function ($routes) {
             $routes->get('article', 'PublicApi::getArticle');
             $routes->get('category', 'PublicApi::getCategory');
             $routes->get('category-products', 'PublicApi::getCategoryProducts');
